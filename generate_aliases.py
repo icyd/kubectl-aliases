@@ -43,34 +43,39 @@ def main():
         ('pf', 'port-forward', None, ['sys']),
         ('g', 'get', None, None),
         ('d', 'describe', None, None),
+        ('e', 'edit', None, None),
         ('rm', 'delete', None, None),
         ('run', 'run --rm --restart=Never --image-pull-policy=IfNotPresent -i -t', None, None),
         ]
 
     res = [
-        ('po', 'pods', ['g', 'd', 'rm'], None),
-        ('dep', 'deployment', ['g', 'd', 'rm'], None),
-        ('svc', 'service', ['g', 'd', 'rm'], None),
-        ('ep', 'endpoints', ['g', 'd', 'rm'], None),
-        ('ing', 'ingress', ['g', 'd', 'rm'], None),
-        ('cm', 'configmap', ['g', 'd', 'rm'], None),
-        ('sec', 'secret', ['g', 'd', 'rm'], None),
-        ('sts', 'statefulsets', ['g', 'd', 'rm'], None),
-        ('ds', 'daemonsets', ['g', 'd', 'rm'], None),
-        ('rs', 'replicasets', ['g', 'd', 'rm'], None),
-        ('ing', 'ingress', ['g', 'd', 'rm'], None),
+        ('p', 'pods', ['g', 'd', 'rm', 'e'], None),
+        ('dep', 'deployment', ['g', 'd', 'rm', 'e'], None),
+        ('svc', 'service', ['g', 'd', 'rm', 'e'], None),
+        ('ep', 'endpoints', ['g', 'd', 'rm', 'e'], None),
+        ('ing', 'ingress', ['g', 'd', 'rm', 'e'], None),
+        ('cm', 'configmap', ['g', 'd', 'rm', 'e'], None),
+        ('sec', 'secret', ['g', 'd', 'rm', 'e'], None),
+        ('sts', 'statefulsets', ['g', 'd', 'rm', 'e'], None),
+        ('ds', 'daemonsets', ['g', 'd', 'rm', 'e'], None),
+        ('rs', 'replicasets', ['g', 'd', 'rm', 'e'], None),
+        ('ing', 'ingress', ['g', 'd', 'rm', 'e'], None),
+        ('sa', 'serviceaccounts', ['g', 'd', 'rm', 'e'], None),
+        ('sc', 'storageclasses', ['g', 'd', 'rm', 'e'], None),
+        ('pv', 'persistentvolumes', ['g', 'd', 'rm', 'e'], None),
+        ('pvc', 'persistentvolumeclaims', ['g', 'd', 'rm', 'e'], None),
         # Istio resources
-        ('gw', 'gateways', ['g', 'd', 'rm'], None),
-        ('vs', 'virtualservices', ['g', 'd', 'rm'], None),
-        ('dr', 'destinationrules', ['g', 'd', 'rm'], None),
-        ('dr', 'serviceentries', ['g', 'd', 'rm'], None),
+        ('gw', 'gateways', ['g', 'd', 'rm', 'e'], None),
+        ('vs', 'virtualservices', ['g', 'd', 'rm', 'e'], None),
+        ('dr', 'destinationrules', ['g', 'd', 'rm', 'e'], None),
+        ('dr', 'serviceentries', ['g', 'd', 'rm', 'e'], None),
         # Other resources
-        ('sd', 'secretdefinitions', ['g', 'd', 'rm'], None),
-        ('es', 'externalsecrets', ['g', 'd', 'rm'], None),
-        ('ss', 'secretstores', ['g', 'd', 'rm'], None),
-        ('css', 'clustersecretstores', ['g', 'd', 'rm'], None),
-        ('no', 'nodes', ['g', 'd'], ['sys']),
-        ('ns', 'namespaces', ['g', 'd', 'rm'], ['sys']),
+        ('sd', 'secretdefinitions', ['g', 'd', 'rm', 'e'], None),
+        ('es', 'externalsecrets', ['g', 'd', 'rm', 'e'], None),
+        ('ss', 'secretstores', ['g', 'd', 'rm', 'e'], None),
+        ('css', 'clustersecretstores', ['g', 'd', 'rm', 'e'], None),
+        ('no', 'nodes', ['g', 'd', 'e'], ['sys']),
+        ('ns', 'namespaces', ['g', 'd', 'rm', 'e'], ['sys']),
         ]
     res_types = [r[0] for r in res]
 
@@ -88,9 +93,9 @@ def main():
 
     # these accept a value, so they need to be at the end and
     # mutually exclusive within each other.
-    positional_args = [('f', '--recursive -f', ['g', 'd', 'rm'], res_types + ['all'
-                       , 'l', 'sys']), ('l', '-l', ['g', 'd', 'rm'], ['f',
-                       'all']), ('n', '--namespace', ['g', 'd', 'rm',
+    positional_args = [('f', '--recursive -f', ['g', 'd', 'rm', 'e'], res_types + ['all'
+                       , 'l', 'sys']), ('l', '-l', ['g', 'd', 'rm', 'e'], ['f',
+                       'all']), ('n', '--namespace', ['g', 'd', 'rm', 'e',
                        'lo', 'ex', 'pf'], ['ns', 'no', 'sys', 'all'])]
 
     # [(part, optional, take_exactly_one)]
