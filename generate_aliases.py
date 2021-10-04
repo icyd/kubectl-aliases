@@ -49,7 +49,7 @@ def main():
         ]
 
     res = [
-        ('p', 'pods', ['g', 'd', 'rm', 'e'], None),
+        ('po', 'pods', ['g', 'd', 'rm', 'e'], None),
         ('dep', 'deployment', ['g', 'd', 'rm', 'e'], None),
         ('svc', 'service', ['g', 'd', 'rm', 'e'], None),
         ('ep', 'endpoints', ['g', 'd', 'rm', 'e'], None),
@@ -64,11 +64,13 @@ def main():
         ('sc', 'storageclasses', ['g', 'd', 'rm', 'e'], None),
         ('pv', 'persistentvolumes', ['g', 'd', 'rm', 'e'], None),
         ('pvc', 'persistentvolumeclaims', ['g', 'd', 'rm', 'e'], None),
+        ('job', 'jobs', ['g', 'd', 'rm', 'e'], None),
+        ('cjob', 'cronjobs', ['g', 'd', 'rm', 'e'], None),
         # Istio resources
         ('gw', 'gateways', ['g', 'd', 'rm', 'e'], None),
         ('vs', 'virtualservices', ['g', 'd', 'rm', 'e'], None),
         ('dr', 'destinationrules', ['g', 'd', 'rm', 'e'], None),
-        ('dr', 'serviceentries', ['g', 'd', 'rm', 'e'], None),
+        ('se', 'serviceentries', ['g', 'd', 'rm', 'e'], None),
         # Other resources
         ('sd', 'secretdefinitions', ['g', 'd', 'rm', 'e'], None),
         ('es', 'externalsecrets', ['g', 'd', 'rm', 'e'], None),
@@ -83,6 +85,8 @@ def main():
         ('oyaml', '-o=yaml', ['g'], ['owide', 'ojson', 'sl']),
         ('owide', '-o=wide', ['g'], ['oyaml', 'ojson']),
         ('ojson', '-o=json', ['g'], ['owide', 'oyaml', 'sl']),
+        ('nw', '--wait=false', ['rm'], ['owide', 'oyaml', 'ojson', 'sl']
+         + diff(res_types, ['po'])),
         ('all', '--all-namespaces', ['g', 'd'], ['rm', 'f', 'no', 'sys'
          ]),
         ('sl', '--show-labels', ['g'], ['oyaml', 'ojson']
